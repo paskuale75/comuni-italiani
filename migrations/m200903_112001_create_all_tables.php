@@ -7,7 +7,7 @@ use yii\db\Migration;
 
 class m200903_112001_create_all_tables extends Migration
 {
-    public function up()
+    public function safeUp()
     {
         $sql = file_get_contents(__DIR__ . '/sql_files/full.sql');
         $command = Yii::$app->db->createCommand($sql);
@@ -18,7 +18,7 @@ class m200903_112001_create_all_tables extends Migration
     }
 
 
-    public function down()
+    public function safeDown()
     {
     }
 }
