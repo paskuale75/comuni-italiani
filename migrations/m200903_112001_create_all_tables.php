@@ -10,11 +10,12 @@ class m200903_112001_create_all_tables extends Migration
     public function safeUp()
     {
         $sql = file_get_contents(__DIR__ . '/sql_files/full.sql');
-        $command = Yii::$app->db->createCommand($sql);
-        $command->execute();
+        Yii::$app->db->pdo->exec($sql);
+        /* $command = Yii::$app->db->createCommand($sql);
+        $command->execute(); */
 
         // Make sure, we fetch all errors
-        while ($command->pdoStatement->nextRowSet()) {}
+        //while ($command->pdoStatement->nextRowSet()) {}
     }
 
 
