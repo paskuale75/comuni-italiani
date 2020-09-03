@@ -9,7 +9,7 @@ class m200903_112001_create_all_tables extends Migration
 {
     public function up()
     {
-        $sql = file_get_contents(__DIR__ . '/sql_files//full.sql');
+        $sql = file_get_contents(__DIR__ . '/sql_files/full.sql');
         $command = Yii::$app->db->createCommand($sql);
         $command->execute();
 
