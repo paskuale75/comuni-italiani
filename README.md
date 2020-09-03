@@ -46,16 +46,13 @@ to the require section of your `composer.json` file.
 
 
 
-Usage
+Configuration
+-------------
 
------
+**Database Migrations**
 
+Before usage this extension, we'll also need to prepare the database.
 
-
-Once the extension is installed, simply use it in your code by  :
-
-
-
-```php
-
-<?= \paskuale75\comuni\AutoloadExample::widget(); ?>```
+```sh
+php yii migrate --migrationPath=@vendor/paskuale/yii2-comuni-italiani/migrations
+```
