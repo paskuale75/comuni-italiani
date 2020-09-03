@@ -2,7 +2,6 @@
 
 //namespace paskuale75\comuni\migrations;
 
-use Yii;
 use yii\db\Migration;
 
 class m200903_112001_create_all_tables extends Migration
