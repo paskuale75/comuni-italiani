@@ -1,6 +1,6 @@
 <?php
 
-namespace paskuale75\comuni;
+namespace paskuale75\comuni\migrations;
 
 
 class Module extends \yii\base\Module
