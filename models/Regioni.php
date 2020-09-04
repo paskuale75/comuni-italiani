@@ -73,4 +73,13 @@ class Regioni extends \yii\db\ActiveRecord
             'sede' => 'Sede',
         ];
     }
+
+
+    /**
+     * RELATIONS
+    */
+
+    public function getCitta(){
+        return $this->hasMany(Citta::class, ['istat' => 'cod_istat']);
+    }
 }

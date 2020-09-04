@@ -42,4 +42,13 @@ class Cap extends \yii\db\ActiveRecord
             'cap' => 'Cap',
         ];
     }
+
+
+    /**
+     * RELATIONS
+     */
+
+    public function getCitta(){
+        return $this->hasOne(Citta::class, ['istat' => 'istat']);
+    }
 }

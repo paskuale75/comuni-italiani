@@ -1,4 +1,5 @@
 <?php
+
 namespace paskuale75\comuni\models;
 
 use Yii;
@@ -58,5 +59,15 @@ class Citta extends \yii\db\ActiveRecord
             'superficie' => 'Superficie',
             'num_residenti' => 'Num Residenti',
         ];
+    }
+
+
+    /**
+    * RELATIONS
+    */
+
+    public function getCap()
+    {
+        return $this->hasOne(Cap::class, ['istat' => 'istat']);
     }
 }
