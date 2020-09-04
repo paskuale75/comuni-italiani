@@ -66,7 +66,12 @@ class Citta extends \yii\db\ActiveRecord
     * RELATIONS
     */
 
-    public function getCap()
+    public function getRegioneModel()
+    {
+        return $this->hasOne(Cap::class, ['cod_istat' => 'istat']);
+    }
+
+    public function getCapModel()
     {
         return $this->hasOne(Cap::class, ['istat' => 'istat']);
     }
