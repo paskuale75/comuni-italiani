@@ -24,7 +24,7 @@ class DefaultController extends Controller
         $query = new Query;
         $tableName = Citta::tableName();
 
-        $query->select('idgen_comune, comune, provincia')
+        $query->select('istat, comune, provincia')
             ->from($tableName)
             ->where('comune LIKE "%' . $q .'%"')
             ->orderBy('comune');
@@ -33,7 +33,7 @@ class DefaultController extends Controller
         $out = [];
         foreach ($data as $d) {
             $out[] = [
-                'id'=>$d['idgen_comune'],
+                'id'=>$d['istat'],
                 'value' => $d['comune'].' ('.$d['provincia'].')'
             ];
         }
