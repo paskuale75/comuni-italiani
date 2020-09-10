@@ -54,5 +54,5 @@ Configuration
 Before usage this extension, we'll also need to prepare the database.
 
 ```sh
-php yii migrate --migrationPath=@vendor/paskuale/yii2-comuni-italiani/migrations
+php yii migrate --migrationPath=@vendor/paskuale75/yii2-comuni-italiani/migrations
 ```
