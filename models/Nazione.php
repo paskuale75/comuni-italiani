@@ -49,4 +49,19 @@ class Nazione extends \yii\db\ActiveRecord
             'sigla_iso_3166_1_alpha_2_stati' => 'Sigla Iso 3166 1 Alpha 2 Stati',
         ];
     }
+
+
+    /**
+     * CUSTOM FUNCTIONS
+     */
+
+    public static function getContentFilterAsJson()
+    {
+        $types = self::find()->all();
+        foreach ($types as $type){
+            $tmpArray[]= ['id' => $type->id,'text'=>$type->nome_stati];
+        }
+        $json = json_encode($tmpArray);
+        return $json;
+    }
 }
