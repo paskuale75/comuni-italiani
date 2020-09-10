@@ -57,7 +57,7 @@ class DefaultController extends Controller
         foreach ($data as $d) {
             $out[] = [
                 'id'=>$d['istat'],
-                'value' => $d['cap']
+                'text' => $d['cap']
             ];
         }
         echo Json::encode($out);
