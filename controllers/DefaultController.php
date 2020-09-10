@@ -8,6 +8,7 @@ use paskuale75\comuni\models\Citta;
 use paskuale75\comuni\models\MultiCap;
 use Yii;
 use yii\db\Query;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
@@ -50,7 +51,8 @@ class DefaultController extends Controller
      */
     public function actionCapsList($q = null)
     {
-        $cap = Citta::findOne($q)->cap;
+        $model = Citta::findOne($q)->capModel;
+        $cap = ArrayHelper::getValue($model,'cap', false);
 
         if (strpos($cap, '-')) {
             $query = new Query;
