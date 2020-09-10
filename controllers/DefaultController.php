@@ -56,7 +56,7 @@ class DefaultController extends Controller
         $out = [];
         foreach ($data as $d) {
             $out[] = [
-                'id'=>$d['istat'],
+                'id'=>$d['cap'],
                 'text' => $d['cap']
             ];
         }
