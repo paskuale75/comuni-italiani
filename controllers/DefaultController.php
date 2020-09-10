@@ -21,21 +21,22 @@ class DefaultController extends Controller
     /**
      * Your controller action to fetch the list
      */
-    public function actionComuniList($q = null) {
+    public function actionComuniList($q = null)
+    {
         $query = new Query;
         $tableName = Citta::tableName();
 
         $query->select('istat, comune, provincia')
             ->from($tableName)
-            ->where('comune LIKE "%' . $q .'%"')
+            ->where('comune LIKE "%' . $q . '%"')
             ->orderBy('comune');
         $command = $query->createCommand();
         $data = $command->queryAll();
         $out = [];
         foreach ($data as $d) {
             $out[] = [
-                'id'=>$d['istat'],
-                'value' => $d['comune'].' ('.$d['provincia'].')'
+                'id' => $d['istat'],
+                'value' => $d['comune'] . ' (' . $d['provincia'] . ')'
             ];
         }
         echo Json::encode($out);
@@ -43,21 +44,35 @@ class DefaultController extends Controller
 
 
 
-    public function actionCapsList($q = null) {
-        $query = new Query;
-        $tableName = MultiCap::tableName();
+    /**
+     * Se la citta ha solo un CAP
+     * altrimenti leggo dalla tabella multiCap
+     */
+    public function actionCapsList($q = null)
+    {
+        $cap = Citta::findOne($q)->cap;
 
-        $query->select('istat, cap')
-            ->from($tableName)
-            ->where(['istat' => $q])
-            ->orderBy('cap');
-        $command = $query->createCommand();
-        $data = $command->queryAll();
-        $out = [];
-        foreach ($data as $d) {
+        if (strpos($cap, '-')) {
+            $query = new Query;
+            $tableName = MultiCap::tableName();
+
+            $query->select('istat, cap')
+                ->from($tableName)
+                ->where(['istat' => $q])
+                ->orderBy('cap');
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out = [];
+            foreach ($data as $d) {
+                $out[] = [
+                    'id' => $d['cap'],
+                    'text' => $d['cap']
+                ];
+            }
+        } else {
             $out[] = [
-                'id'=>$d['cap'],
-                'text' => $d['cap']
+                'id' => $cap,
+                'text' => $cap
             ];
         }
         echo Json::encode($out);
