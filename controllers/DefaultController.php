@@ -50,7 +50,7 @@ class DefaultController extends Controller
         $query->select('istat, cap')
             ->from($tableName)
             ->where(['istat' => $q])
-            ->orderBy('id');
+            ->orderBy('cap');
         $command = $query->createCommand();
         $data = $command->queryAll();
         $out = [];
