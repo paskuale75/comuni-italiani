@@ -3,6 +3,7 @@
 namespace paskuale75\comuni\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "italy_cities".
@@ -63,8 +64,8 @@ class Citta extends \yii\db\ActiveRecord
 
 
     /**
-    * RELATIONS
-    */
+     * RELATIONS
+     */
 
     public function getRegioneModel()
     {
@@ -74,5 +75,26 @@ class Citta extends \yii\db\ActiveRecord
     public function getCapModel()
     {
         return $this->hasOne(Cap::class, ['istat' => 'istat']);
+    }
+
+    public function getCapsElenco()
+    {
+        return $this->hasMany(MultiCap::class, ['istat' => 'istat']);
+    }
+
+
+
+    /**
+     * CUSTOM FUNCTIONS
+     */
+
+    public static function getCapsFilterAsJson()
+    {
+        $types = self::find()->joinWith(['capsElenco ce'])->all();
+        foreach ($types as $type) {
+            $tmpArray[] = ['id' => $type->id, 'text' => $type->cap];
+        }
+        $json = json_encode($tmpArray);
+        return $json;
     }
 }
