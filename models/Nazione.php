@@ -3,6 +3,7 @@
 namespace paskuale75\comuni\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "tbl_stati".
@@ -63,5 +64,12 @@ class Nazione extends \yii\db\ActiveRecord
         }
         $json = json_encode($tmpArray);
         return $json;
+    }
+
+    public static function getContentFilter()
+    {
+        $types = self::find()->all();
+        $listData = ArrayHelper::map($types,'id','nome_stati');
+        return $listData;
     }
 }
