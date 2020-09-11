@@ -43,6 +43,15 @@ class DefaultController extends Controller
         echo Json::encode($out);
     }
 
+    
+    /**
+     * Restituisce nome comune passandogli la chiave primaria
+     */
+    public function actionGetComuneNome($id){
+        $q = Citta::findOne($id);
+        return ArrayHelper::getValue($q,'comune','');
+    }
+
 
 
     /**
