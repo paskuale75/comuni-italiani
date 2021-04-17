@@ -13,6 +13,7 @@ use yii\helpers\ArrayHelper;
  * @property string|null $sigla_numerica_stati
  * @property string|null $sigla_iso_3166_1_alpha_3_stati
  * @property string|null $sigla_iso_3166_1_alpha_2_stati
+ * @property string|null $sigla_belfiore
  */
 class Nazione extends \yii\db\ActiveRecord
 {
@@ -31,7 +32,7 @@ class Nazione extends \yii\db\ActiveRecord
     {
         return [
             [['nome_stati'], 'string', 'max' => 128],
-            [['sigla_numerica_stati'], 'string', 'max' => 4],
+            [['sigla_numerica_stati','sigla_belfiore'], 'string', 'max' => 4],
             [['sigla_iso_3166_1_alpha_3_stati'], 'string', 'max' => 3],
             [['sigla_iso_3166_1_alpha_2_stati'], 'string', 'max' => 2],
         ];
@@ -46,6 +47,7 @@ class Nazione extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nome_stati' => 'Nome Stati',
             'sigla_numerica_stati' => 'Sigla Numerica Stati',
+            'sigla_belfiore'       => 'Belfiore',
             'sigla_iso_3166_1_alpha_3_stati' => 'Sigla Iso 3166 1 Alpha 3 Stati',
             'sigla_iso_3166_1_alpha_2_stati' => 'Sigla Iso 3166 1 Alpha 2 Stati',
         ];
