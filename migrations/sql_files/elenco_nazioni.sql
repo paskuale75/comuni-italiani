@@ -4,12 +4,12 @@ CREATE TABLE IF NOT EXISTS `tbl_stati` (
   `sigla_numerica_stati` varchar(4) DEFAULT NULL,
   `sigla_iso_3166_1_alpha_3_stati` varchar(3) DEFAULT NULL,
   `sigla_iso_3166_1_alpha_2_stati` varchar(2) DEFAULT NULL,
-  `sigla_belfiore` varchar(4) DEFAULT NULL,
+  `cod_fisco` varchar(4) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `PRIMARY_KEY` (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=250 ;
 
-INSERT INTO `tbl_stati` (`id`, `nome_stati`, `sigla_numerica_stati`, `sigla_iso_3166_1_alpha_3_stati`, `sigla_iso_3166_1_alpha_2_stati`, `sigla_belfiore`) VALUES
+INSERT INTO `tbl_stati` (`id`, `nome_stati`, `sigla_numerica_stati`, `sigla_iso_3166_1_alpha_3_stati`, `sigla_iso_3166_1_alpha_2_stati`, `cod_fisco`) VALUES
 (1, 'Afghanistan', '004', 'AFG', 'AF', 'Z200'),
 (2, 'Albania', '008', 'ALB', 'AL', 'Z100'),
 (3, 'Algeria', '012', 'DZA', 'DZ', 'Z301'),
