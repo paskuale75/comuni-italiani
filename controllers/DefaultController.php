@@ -6,6 +6,7 @@ namespace paskuale75\comuni\controllers;
 use Faker\Provider\DateTime;
 use paskuale75\comuni\models\Citta;
 use paskuale75\comuni\models\MultiCap;
+use paskuale75\comuni\models\Nazione;
 use Yii;
 use yii\db\Query;
 use yii\helpers\ArrayHelper;
