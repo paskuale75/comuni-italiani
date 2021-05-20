@@ -52,7 +52,7 @@ class DefaultController extends Controller
         $data = $command->queryAll();
         foreach ($data as $d) {
             $out[] = [
-                'id' => $d['cod_fisco'],
+                'id' => $d['id'],
                 'value' => $d['nome_stati'] . ' (' . $d['sigla_iso_3166_1_alpha_2_stati'] . ')',
                 'flgNazione' => true
             ];
