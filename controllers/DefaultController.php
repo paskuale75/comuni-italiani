@@ -37,9 +37,26 @@ class DefaultController extends Controller
         foreach ($data as $d) {
             $out[] = [
                 'id' => $d['istat'],
-                'value' => $d['comune'] . ' (' . $d['provincia'] . ')'
+                'value' => $d['comune'] . ' (' . $d['provincia'] . ')',
+                'flgNazione' => false
             ];
         }
+
+        $tableName = Nazione::tableName();
+        $query->select('id, nome_stati, cod_fisco, sigla_iso_3166_1_alpha_2_stati')
+        ->from($tableName)
+        ->where('nome_stati LIKE "%' . $q . '%"')
+        ->orderBy('nome_stati');
+        $command = $query->createCommand();
+        $data = $command->queryAll();
+        foreach ($data as $d) {
+            $out[] = [
+                'id' => $d['id'],
+                'value' => $d['nome_stati'] . ' (' . $d['sigla_iso_3166_1_alpha_2_stati'] . ')',
+                'flgNazione' => true
+            ];
+        }
+        
         echo Json::encode($out);
     }
 
