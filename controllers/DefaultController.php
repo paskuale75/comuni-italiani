@@ -23,7 +23,7 @@ class DefaultController extends Controller
     /**
      * Your controller action to fetch the list
      */
-    public function actionComuniList($q = null)
+    public function actionComuniList($q = null, $flgNotNazioni = false)
     {
         $query = new Query;
         $tableName = Citta::tableName();
@@ -43,21 +43,22 @@ class DefaultController extends Controller
             ];
         }
 
-        $tableName = Nazione::tableName();
-        $query->select('id, nome_stati, cod_fisco, sigla_iso_3166_1_alpha_2_stati')
-        ->from($tableName)
-        ->where('nome_stati LIKE "%' . $q . '%"')
-        ->orderBy('nome_stati');
-        $command = $query->createCommand();
-        $data = $command->queryAll();
-        foreach ($data as $d) {
-            $out[] = [
-                'id' => $d['id'],
-                'value' => $d['nome_stati'] . ' (' . $d['sigla_iso_3166_1_alpha_2_stati'] . ')',
-                'flgNazione' => true
-            ];
+        if(!$flgNotNazioni){
+            $tableName = Nazione::tableName();
+            $query->select('id, nome_stati, cod_fisco, sigla_iso_3166_1_alpha_2_stati')
+            ->from($tableName)
+            ->where('nome_stati LIKE "%' . $q . '%"')
+            ->orderBy('nome_stati');
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            foreach ($data as $d) {
+                $out[] = [
+                    'id' => $d['id'],
+                    'value' => $d['nome_stati'] . ' (' . $d['sigla_iso_3166_1_alpha_2_stati'] . ')',
+                    'flgNazione' => true
+                ];
+            }
         }
-        
         echo Json::encode($out);
     }
 
