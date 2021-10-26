@@ -30,7 +30,7 @@ class DefaultController extends Controller
 
         $query->select('istat, comune, provincia')
             ->from($tableName)
-            ->where('comune LIKE "%' . $q . '%"')
+            ->where('comune LIKE "' . $q . '%"')
             ->orderBy('comune');
         $command = $query->createCommand();
         $data = $command->queryAll();
