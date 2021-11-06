@@ -7,6 +7,7 @@ use Faker\Provider\DateTime;
 use paskuale75\comuni\models\Citta;
 use paskuale75\comuni\models\MultiCap;
 use paskuale75\comuni\models\Nazione;
+use paskuale75\comuni\models\Provincia;
 use Yii;
 use yii\db\Query;
 use yii\helpers\ArrayHelper;
@@ -27,9 +28,10 @@ class DefaultController extends Controller
     {
         $query = new Query;
         $tableName = Citta::tableName();
+        $tableProvincia = Provincia::tableName();
 
         $query->select('istat, comune, provincia')
-            ->join('provincia')
+            ->leftJoin($tableProvincia,$tableProvincia.'.provincia = provincia')
             ->from($tableName)
             ->where('comune LIKE "' . $q . '%"')
             ->orderBy('comune');
