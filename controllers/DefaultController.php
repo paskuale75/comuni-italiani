@@ -30,23 +30,23 @@ class DefaultController extends Controller
         $tableName = Citta::tableName();
         $tableProvincia = Provincia::tableName();
 
-        $query->select('istat, comune, provincia')
-            ->leftJoin($tableProvincia,$tableProvincia.'.provincia = '.$tableName.'.provincia')
-            ->from($tableName)
-            ->where('comune LIKE "' . $q . '%"')
-            ->orderBy('comune');
+        $query->select($tableProvincia.'.sigla, '.$tableProvincia.'.provincia, '.$tableName.'.istat')
+            ->join('INNER JOIN',$tableName, $tableName.'.comune = '.$tableProvincia.'.provincia')
+            ->from($tableProvincia)
+            ->where($tableProvincia.'.provincia LIKE "' . $q . '%"')
+            ->orderBy($tableProvincia.'.provincia');
         $command = $query->createCommand();
         $data = $command->queryAll();
         $out = [];
         foreach ($data as $d) {
             $out[] = [
                 'id' => $d['istat'],
-                'value' => $d['comune'] . ' (' . $d['provincia'] . ')',
+                'value' => $d['provincia'] . ' (' . $d['sigla'] . ')',
                 'flgNazione' => false
             ];
         }
 
-        if(!$flgNotNazioni){
+        /* if(!$flgNotNazioni){
             $tableName = Nazione::tableName();
             $query->select('id, nome_stati, cod_fisco, sigla_iso_3166_1_alpha_2_stati')
             ->from($tableName)
@@ -61,7 +61,8 @@ class DefaultController extends Controller
                     'flgNazione' => true
                 ];
             }
-        }
+        } */
+        
         echo Json::encode($out);
     }
 
