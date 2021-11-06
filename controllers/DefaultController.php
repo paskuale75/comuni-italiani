@@ -31,7 +31,7 @@ class DefaultController extends Controller
         $tableProvincia = Provincia::tableName();
 
         $query->select('istat, comune, provincia')
-            ->leftJoin($tableProvincia,$tableProvincia.'.provincia = provincia')
+            ->leftJoin($tableProvincia,$tableProvincia.'.provincia = '.$tableName.'.provincia')
             ->from($tableName)
             ->where('comune LIKE "' . $q . '%"')
             ->orderBy('comune');
