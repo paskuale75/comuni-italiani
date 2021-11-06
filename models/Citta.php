@@ -83,6 +83,11 @@ class Citta extends \yii\db\ActiveRecord
     }
 
 
+    public function getProvincia(){
+        return $this->hasOne(Provincia::class,['comune' => 'provincia']);
+    }
+
+
 
     /**
      * CUSTOM FUNCTIONS
