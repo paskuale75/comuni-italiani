@@ -63,7 +63,7 @@ class DefaultController extends Controller
             }
         } */
         
-        echo Json::encode($out);
+        return Json::encode($out);
     }
 
 
@@ -103,7 +103,7 @@ class DefaultController extends Controller
                 ];
             }
         }
-        echo Json::encode($out);
+        return Json::encode($out);
     }
 
     
@@ -149,6 +149,6 @@ class DefaultController extends Controller
                 'text' => $cap
             ];
         }
-        echo Json::encode($out);
+        return Json::encode($out);
     }
 }
