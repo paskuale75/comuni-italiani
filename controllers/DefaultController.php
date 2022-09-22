@@ -123,31 +123,35 @@ class DefaultController extends Controller
      */
     public function actionCapsList($q = null)
     {
-        $model = Citta::findOne($q)->capModel;
-        $cap = ArrayHelper::getValue($model,'cap', false);
+        $citta = Citta::findOne($q);
+        $out = [];
+        if($citta){
+            $model = Citta::findOne($q)->capModel;
+            $cap = ArrayHelper::getValue($model,'cap', false);
 
-        if (strpos($cap, '-')) {
-            $query = new Query;
-            $tableName = MultiCap::tableName();
+            if (strpos($cap, '-')) {
+                $query = new Query;
+                $tableName = MultiCap::tableName();
 
-            $query->select('istat, cap')
-                ->from($tableName)
-                ->where(['istat' => $q])
-                ->orderBy('cap');
-            $command = $query->createCommand();
-            $data = $command->queryAll();
-            $out = [];
-            foreach ($data as $d) {
+                $query->select('istat, cap')
+                    ->from($tableName)
+                    ->where(['istat' => $q])
+                    ->orderBy('cap');
+                $command = $query->createCommand();
+                $data = $command->queryAll();
+                $out = [];
+                foreach ($data as $d) {
+                    $out[] = [
+                        'id' => $d['cap'],
+                        'text' => $d['cap']
+                    ];
+                }
+            } else {
                 $out[] = [
-                    'id' => $d['cap'],
-                    'text' => $d['cap']
+                    'id' => $cap,
+                    'text' => $cap
                 ];
             }
-        } else {
-            $out[] = [
-                'id' => $cap,
-                'text' => $cap
-            ];
         }
         return Json::encode($out);
     }
